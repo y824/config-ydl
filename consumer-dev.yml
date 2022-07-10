@@ -1,0 +1,34 @@
+server:
+  port: 8001
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZonezz: http://localhost:8761/eureka #,http://eureka-server1:8763/eureka # eureka服务端地址，将来客户端使用该地址和eureka进行通信http://localhost:8762/eureka
+
+spring:
+  application:
+    name: eureka-consumer #设置当前应用名称
+
+eureke-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#设置超时时间
+ribbon:
+  ConnectTimeout: 1000 #连接超时时间 默认1s
+  ReadTimeout: 10000 #逻辑处理的超时时间  默认1s
+
+
+#设置当前的日志级别 debug, feign只支持记录debug级别的日志
+logging:
+  level:
+    com.code: debug
+
+#开启feign对hystrix的支持
+feign:
+  hystrix:
+    enabled: true
